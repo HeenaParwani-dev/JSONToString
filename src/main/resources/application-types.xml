@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="PersonalDetails" format="json">
+      <types:shape format="weave" example="examples/PersonalDetails.txt"><![CDATA[%dw 2.0
+
+type PersonalDetails = {|
+  cid: Number {"typeId": "int"}, 
+  firstName: String, 
+  lastname: String
+|} {"example": "{\\\"cid\\\":100,\\\"firstName\\\":\\\"Bruce\\\",\\\"lastname\\\":\\\"Wayne\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#9404c838-d9d6-45b0-b4e1-600fe8c7898d">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="PersonalDetails"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
